@@ -28,6 +28,10 @@ type Mock struct {
 	*mock.Mock
 }
 
+func (m *Mock) On(methodName string, arguments ...interface{}) *mock.Call {
+	return m.Mock.On(methodName, arguments)
+}
+
 type TestingT struct {
 	mock.TestingT
 }

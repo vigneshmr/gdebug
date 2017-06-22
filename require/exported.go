@@ -9,8 +9,6 @@ package require
 */
 
 import (
-	"testing"
-
 	"github.com/stretchr/testify/require"
 )
 
@@ -22,7 +20,7 @@ type Assertions struct {
 }
 
 // New makes a new Assertions object for the specified TestingT.
-func New(t *testing.T) *Assertions {
+func New(t require.TestingT) *Assertions {
 	return &Assertions{
 		Assertions: require.New(t),
 		tHook:      t,
@@ -33,6 +31,6 @@ type TestingT struct {
 	require.TestingT
 }
 
-func NoError(t TestingT, err error, msgAndArgs ...interface{}) {
+func NoError(t require.TestingT, err error, msgAndArgs ...interface{}) {
 	require.NoError(t, err, msgAndArgs)
 }
