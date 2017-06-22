@@ -1,8 +1,8 @@
 package gdebug
 
 import (
-	"testing"
 	"math/rand"
+	"testing"
 )
 
 var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")

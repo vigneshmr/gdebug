@@ -1,3 +1,4 @@
 package: code.uber.internal/recognition/gdebug
 import:
 - package: github.com/fatih/color
+- package: github.com/stretchr/testify
