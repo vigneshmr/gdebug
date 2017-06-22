@@ -4,30 +4,23 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"reflect"
 	"strings"
 	"text/tabwriter"
 
 	"github.com/fatih/color"
 )
 
-func max(i, j int) int {
-	if i >= j {
-		return i
-	}
-	return j
-}
-
 // Dump an object
-func Dump(obj interface{}, msg string) []string {
+func Dump(obj interface{}, msg string) {
 	expObj, _ := json.MarshalIndent(obj, "", "    ")
-	s := fmt.Sprintf("[%s]\n%s", msg, string(expObj))
-	return strings.Split(s, "\n")
+	fmt.Printf("[%s]\n%s", msg, string(expObj))
 }
 
 // DumpComparison dumps the given objects for comparison
 func DumpComparison(expected interface{}, actual interface{}) {
-	s1 := Dump(expected, "Expected")
-	s2 := Dump(actual, "Actual")
+	s1 := dumpObj(expected, "Expected")
+	s2 := dumpObj(actual, "Actual")
 
 	w := tabwriter.NewWriter(os.Stdout, 3, 10, 0, ' ', 0)
 	red := color.New(color.BgRed)
@@ -65,4 +58,24 @@ func DumpComparison(expected interface{}, actual interface{}) {
 		}
 	}
 	w.Flush()
+}
+
+// DumpComparisonIfDifferent dumps the given objects for comparison if their values differ
+func DumpComparisonIfDifferent(expected interface{}, actual interface{}) {
+	if !reflect.DeepEqual(expected, actual) {
+		DumpComparison(expected, actual)
+	}
+}
+
+func max(i, j int) int {
+	if i >= j {
+		return i
+	}
+	return j
+}
+
+func dumpObj(obj interface{}, msg string) []string {
+	expObj, _ := json.MarshalIndent(obj, "", "    ")
+	s := fmt.Sprintf("[%s]\n%s", msg, string(expObj))
+	return strings.Split(s, "\n")
 }
