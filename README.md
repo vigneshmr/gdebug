@@ -54,6 +54,10 @@ or if you use vendored packages, add the following line to your `glide.yaml` and
     DumpComparison(testStruct{}, testStruct{})
     ```
 
+    **Output:**
+    
+    <img src="https://user-images.githubusercontent.com/1412892/27418738-eb42765e-56d1-11e7-9dad-c753daed6540.png" width=60%>
+    
 - **DumpComparisonIfDifferent:**
     Print a side by side comparison of two object if they differ in value.
     
